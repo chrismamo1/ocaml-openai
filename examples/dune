@@ -1,0 +1,14 @@
+(executable
+ (public_name ai-chat)
+ (name ai_chat)
+ (libraries openai lwt lwt.unix lambda-term react)
+ (flags -g)
+ (preprocess
+  (pps
+   ppx_deriving_yojson
+   ppx_deriving.show
+   ppx_deriving.eq
+   ppx_deriving.ord
+   ppx_deriving.std
+   ez_api.ppx
+   lwt_ppx)))
