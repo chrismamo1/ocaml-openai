@@ -6,7 +6,7 @@
  *)
 
 type t = {
-    _object: string;
+    _object: string [@key "object"];
     data: Open_ai_file.t list;
 } [@@deriving yojson { strict = false }, show ];;
 

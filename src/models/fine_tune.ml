@@ -7,7 +7,7 @@
 
 type t = {
     id: string;
-    _object: string;
+    _object: string [@key "object"];
     created_at: int32;
     updated_at: int32;
     model: string;
@@ -21,7 +21,7 @@ type t = {
     events: Fine_tune_event.t list;
 } [@@deriving yojson { strict = false }, show ];;
 
-let create (id : string) (_object : string) (created_at : int32) (updated_at : int32) (model : string) (fine_tuned_model : stringoption) (organization_id : string) (status : string) (hyperparams : Yojson.Safe.t) (training_files : Open_ai_file.t list) (validation_files : Open_ai_file.t list) (result_files : Open_ai_file.t list) : t = {
+let create (id : string) (_object : string) (created_at : int32) (updated_at : int32) (model : string) (fine_tuned_model : string option) (organization_id : string) (status : string) (hyperparams : Yojson.Safe.t) (training_files : Open_ai_file.t list) (validation_files : Open_ai_file.t list) (result_files : Open_ai_file.t list) : t = {
     id = id;
     _object = _object;
     created_at = created_at;

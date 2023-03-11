@@ -6,7 +6,7 @@
  *)
 
 type t = {
-    _object: string;
+    _object: string [@key "object"];
     created_at: int32;
     level: string;
     message: string;

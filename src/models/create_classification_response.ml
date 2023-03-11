@@ -6,7 +6,7 @@
  *)
 
 type t = {
-    _object: string option [@default None];
+    _object: string option [@default None] [@key "object"];
     model: string option [@default None];
     search_model: string option [@default None];
     completion: string option [@default None];

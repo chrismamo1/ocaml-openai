@@ -7,7 +7,7 @@
 
 type t = {
     index: int32;
-    _object: string;
+    _object: string [@key "object"];
     embedding: float list;
 } [@@deriving yojson { strict = false }, show ];;
 

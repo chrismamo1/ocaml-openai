@@ -6,7 +6,7 @@
  *)
 
 type t = {
-    _object: string;
+    _object: string [@key "object"];
     data: Engine.t list;
 } [@@deriving yojson { strict = false }, show ];;
 

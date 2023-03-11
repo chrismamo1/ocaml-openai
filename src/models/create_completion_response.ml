@@ -7,7 +7,7 @@
 
 type t = {
     id: string;
-    _object: string;
+    _object: string [@key "object"];
     created: int32;
     model: string;
     choices: Create_completion_response_choices.t list;

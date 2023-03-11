@@ -7,7 +7,7 @@
 
 type t = {
     id: string;
-    _object: string;
+    _object: string [@key "object"];
     bytes: int32;
     created_at: int32;
     filename: string;

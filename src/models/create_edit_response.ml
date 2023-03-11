@@ -6,7 +6,7 @@
  *)
 
 type t = {
-    _object: string;
+    _object: string [@key "object"];
     created: int32;
     choices: Create_completion_response_choices.t list;
     usage: Create_completion_response_usage.t;

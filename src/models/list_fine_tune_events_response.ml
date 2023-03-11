@@ -6,7 +6,7 @@
  *)
 
 type t = {
-    _object: string;
+    _object: string [@key "object"];
     data: Fine_tune_event.t list;
 } [@@deriving yojson { strict = false }, show ];;
 
