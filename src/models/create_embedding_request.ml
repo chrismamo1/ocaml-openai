@@ -6,11 +6,11 @@
  *)
 
 type t = {
-    (* Input text to get embeddings for, encoded as a string or array of tokens. To get embeddings for multiple inputs in a single request, pass an array of strings or array of token arrays. Each input must not exceed 8192 tokens in length.  *)
-    input: One_ofstringarrayarrayarray.t;
+    (* Input text to get embeddings for, encoded as a string, array of strings, array of tokens, or array of token arrays. Each input must not exceed 8192 tokens in length.  *)
+    input: MultiTypes.StringOrStringArrayOrIntArrayOrIntArrayArray.t;
 } [@@deriving yojson { strict = false }, show ];;
 
-let create (input : One_ofstringarrayarrayarray.t) : t = {
+let create input : t = {
     input = input;
 }
 

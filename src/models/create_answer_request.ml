@@ -28,8 +28,8 @@ type t = {
     logprobs: int32 option [@default None];
     (* The maximum number of tokens allowed for the generated answer *)
     max_tokens: int32 option [@default None];
-    (* completions_stop_description *)
-    stop: One_ofstringarray.t option [@default None];
+    (* Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence. *)
+    stop: string array option [@default None];
     (* How many answers to generate for each question. *)
     n: int32 option [@default None];
     (* If set to `true`, the returned JSON will include a \''prompt\'' field containing the final prompt that was used to request a completion. This is mainly useful for debugging purposes. *)

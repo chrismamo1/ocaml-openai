@@ -8,8 +8,12 @@
 type t = {
     (* ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them. *)
     model: string;
-    (* The prompt(s) to generate completions for, encoded as a string, array of strings, array of tokens, or array of token arrays.  Note that <|endoftext|> is the document separator that the model sees during training, so if a prompt is not specified the model will generate as if from the beginning of a new document.  *)
-    prompt: One_ofstringarrayarrayarray.t option [@default None];
+    (**
+      * The prompt(s) to generate completions for, encoded as a string, array of strings, array of tokens, or array of token arrays.
+      *
+      * Note that <|endoftext|> is the document separator that the model sees during training, so if a prompt is not specified the model will generate as if from the beginning of a new document.
+      *)
+    prompt: MultiTypes.StringOrStringArrayOrIntArrayOrIntArrayArray.t option [@default None];
     (* The suffix that comes after a completion of inserted text. *)
     suffix: string option [@default None];
     (* The maximum number of [tokens](/tokenizer) to generate in the completion.  The token count of your prompt plus `max_tokens` cannot exceed the model's context length. Most models have a context length of 2048 tokens (except for the newest models, which support 4096).  *)
@@ -27,7 +31,7 @@ type t = {
     (* Echo back the prompt in addition to the completion  *)
     echo: bool option [@default None];
     (* Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.  *)
-    stop: One_ofstringarray.t option [@default None];
+    stop: string array option [@default None];
     (* Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.  [See more information about frequency and presence penalties.](/docs/api-reference/parameter-details)  *)
     presence_penalty: float option [@default None];
     (* Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.  [See more information about frequency and presence penalties.](/docs/api-reference/parameter-details)  *)

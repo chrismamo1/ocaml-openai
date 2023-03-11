@@ -7,12 +7,12 @@
 
 type t = {
     id: string;
-    _object: string;
+    _object: string [@key "object"];
     created: int32 option;
     ready: bool;
 } [@@deriving yojson { strict = false }, show ];;
 
-let create (id : string) (_object : string) (created : int32option) (ready : bool) : t = {
+let create (id : string) (_object : string) (created : int32 option) (ready : bool) : t = {
     id = id;
     _object = _object;
     created = created;

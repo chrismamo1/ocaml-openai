@@ -1,6 +1,10 @@
-let api_key = ""
+let api_key = Sys.getenv "OPENAI_API_KEY"
 let base_url = "https://api.openai.com/v1"
-let default_headers = Cohttp.Header.init_with "Content-Type" "application/json"
+let default_headers =
+  Cohttp.Header.add
+    (Cohttp.Header.init_with "Content-Type" "application/json")
+    "Authorization"
+    ("Bearer " ^ api_key)
 
 let option_fold f default o =
   match o with
