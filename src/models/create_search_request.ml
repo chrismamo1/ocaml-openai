@@ -16,13 +16,4 @@ type t = {
     max_rerank: int32 option [@default None];
     (* A special boolean flag for showing metadata. If set to `true`, each document entry in the returned JSON will contain a \''metadata\'' field.  This flag only takes effect when `file` is set.  *)
     return_metadata: bool option [@default None];
-} [@@deriving yojson { strict = false }, show ];;
-
-let create (query : string) : t = {
-    query = query;
-    documents = [];
-    file = None;
-    max_rerank = None;
-    return_metadata = None;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

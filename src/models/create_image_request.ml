@@ -14,12 +14,4 @@ type t = {
     size: Enums.size option [@default Some(`_1024x1024)];
     (* The format in which the generated images are returned. Must be one of `url` or `b64_json`. *)
     response_format: Enums.response_format option [@default Some(`Url)];
-} [@@deriving yojson { strict = false }, show ];;
-
-let create (prompt : string) : t = {
-    prompt = prompt;
-    n = None;
-    size = None;
-    response_format = None;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

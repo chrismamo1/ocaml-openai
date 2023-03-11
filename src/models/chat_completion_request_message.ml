@@ -12,11 +12,4 @@ type t = {
     content: string;
     (* The name of the user in a multi-user chat *)
     name: string option [@default None];
-} [@@deriving yojson { strict = false }, show ];;
-
-let create (role : Enums.role) (content : string) : t = {
-    role = role;
-    content = content;
-    name = None;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

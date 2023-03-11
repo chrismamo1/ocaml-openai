@@ -10,10 +10,4 @@ type t = {
     file: string;
     (* The intended purpose of the uploaded documents.  Use \''fine-tune\'' for [Fine-tuning](/docs/api-reference/fine-tunes). This allows us to validate the format of the uploaded file.  *)
     purpose: string;
-} [@@deriving yojson { strict = false }, show ];;
-
-let create (file : string) (purpose : string) : t = {
-    file = file;
-    purpose = purpose;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

@@ -8,10 +8,4 @@
 type t = {
     _object: string [@key "object"];
     data: Fine_tune.t list;
-} [@@deriving yojson { strict = false }, show ];;
-
-let create (_object : string) (data : Fine_tune.t list) : t = {
-    _object = _object;
-    data = data;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

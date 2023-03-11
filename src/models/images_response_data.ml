@@ -8,10 +8,4 @@
 type t = {
     url: string option [@default None];
     b64_json: string option [@default None];
-} [@@deriving yojson { strict = false }, show ];;
-
-let create () : t = {
-    url = None;
-    b64_json = None;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

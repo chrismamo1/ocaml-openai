@@ -10,12 +10,4 @@ type t = {
     created: int32;
     choices: Create_completion_response_choices.t list;
     usage: Create_completion_response_usage.t;
-} [@@deriving yojson { strict = false }, show ];;
-
-let create (_object : string) (created : int32) (choices : Create_completion_response_choices.t list) (usage : Create_completion_response_usage.t) : t = {
-    _object = _object;
-    created = created;
-    choices = choices;
-    usage = usage;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

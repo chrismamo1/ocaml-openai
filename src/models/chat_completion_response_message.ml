@@ -10,10 +10,4 @@ type t = {
     role: Enums.role;
     (* The contents of the message *)
     content: string;
-} [@@deriving yojson { strict = false }, show ];;
-
-let create (role : Enums.role) (content : string) : t = {
-    role = role;
-    content = content;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

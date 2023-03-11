@@ -12,11 +12,4 @@ type t = {
     mask: string option [@default None];
     (* A text description of the desired image(s). The maximum length is 1000 characters. *)
     prompt: string;
-} [@@deriving yojson { strict = false }, show ];;
-
-let create (image : string) (prompt : string) : t = {
-    image = image;
-    mask = None;
-    prompt = prompt;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

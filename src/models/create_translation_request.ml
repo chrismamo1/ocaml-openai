@@ -16,13 +16,4 @@ type t = {
     response_format: string option [@default None];
     (* The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to automatically increase the temperature until certain thresholds are hit.  *)
     temperature: float option [@default None];
-} [@@deriving yojson { strict = false }, show ];;
-
-let create (file : string) (model : string) : t = {
-    file = file;
-    model = model;
-    prompt = None;
-    response_format = None;
-    temperature = None;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

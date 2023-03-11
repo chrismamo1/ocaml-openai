@@ -12,14 +12,4 @@ type t = {
     completion: string option [@default None];
     label: string option [@default None];
     selected_examples: Create_classification_response_selected_examples.t list;
-} [@@deriving yojson { strict = false }, show ];;
-
-let create () : t = {
-    _object = None;
-    model = None;
-    search_model = None;
-    completion = None;
-    label = None;
-    selected_examples = [];
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

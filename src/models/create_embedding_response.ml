@@ -10,12 +10,4 @@ type t = {
     model: string;
     data: Create_embedding_response_data.t list;
     usage: Create_embedding_response_usage.t;
-} [@@deriving yojson { strict = false }, show ];;
-
-let create (_object : string) (model : string) (data : Create_embedding_response_data.t list) (usage : Create_embedding_response_usage.t) : t = {
-    _object = _object;
-    model = model;
-    data = data;
-    usage = usage;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

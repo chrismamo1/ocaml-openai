@@ -10,12 +10,4 @@ type t = {
     _object: string [@key "object"];
     created: int32;
     owned_by: string;
-} [@@deriving yojson { strict = false }, show ];;
-
-let create (id : string) (_object : string) (created : int32) (owned_by : string) : t = {
-    id = id;
-    _object = _object;
-    created = created;
-    owned_by = owned_by;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

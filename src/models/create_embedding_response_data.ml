@@ -9,11 +9,4 @@ type t = {
     index: int32;
     _object: string [@key "object"];
     embedding: float list;
-} [@@deriving yojson { strict = false }, show ];;
-
-let create (index : int32) (_object : string) (embedding : float list) : t = {
-    index = index;
-    _object = _object;
-    embedding = embedding;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

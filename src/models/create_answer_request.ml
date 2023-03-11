@@ -36,23 +36,4 @@ type t = {
     return_prompt: bool option [@default None];
     (* If an object name is in the list, we provide the full information of the object; otherwise, we only provide the object ID. Currently we support `completion` and `file` objects for expansion. *)
     expand: Yojson.Safe.t list;
-} [@@deriving yojson { strict = false }, show ];;
-
-let create (model : string) (question : string) (examples : string list list) (examples_context : string) : t = {
-    model = model;
-    question = question;
-    examples = examples;
-    examples_context = examples_context;
-    documents = [];
-    file = None;
-    search_model = None;
-    max_rerank = None;
-    temperature = None;
-    logprobs = None;
-    max_tokens = None;
-    stop = None;
-    n = None;
-    return_prompt = None;
-    expand = [];
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

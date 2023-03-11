@@ -18,14 +18,4 @@ type t = {
     temperature: float option [@default None];
     (* completions_top_p_description *)
     top_p: float option [@default None];
-} [@@deriving yojson { strict = false }, show ];;
-
-let create (model : string) (instruction : string) : t = {
-    model = model;
-    input = None;
-    instruction = instruction;
-    n = None;
-    temperature = None;
-    top_p = None;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

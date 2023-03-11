@@ -42,24 +42,4 @@ type t = {
     logit_bias: Yojson.Safe.t option [@default None];
     (* A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. [Learn more](/docs/guides/safety-best-practices/end-user-ids).  *)
     user: string option [@default None];
-} [@@deriving yojson { strict = false }, show ];;
-
-let create (model : string) : t = {
-    model = model;
-    prompt = None;
-    suffix = None;
-    max_tokens = None;
-    temperature = None;
-    top_p = None;
-    n = None;
-    stream = None;
-    logprobs = None;
-    echo = None;
-    stop = None;
-    presence_penalty = None;
-    frequency_penalty = None;
-    best_of = None;
-    logit_bias = None;
-    user = None;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

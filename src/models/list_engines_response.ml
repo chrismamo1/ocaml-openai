@@ -8,10 +8,4 @@
 type t = {
     _object: string [@key "object"];
     data: Engine.t list;
-} [@@deriving yojson { strict = false }, show ];;
-
-let create (_object : string) (data : Engine.t list) : t = {
-    _object = _object;
-    data = data;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

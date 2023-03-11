@@ -30,20 +30,4 @@ type t = {
     classification_betas: float list;
     (* A string of up to 40 characters that will be added to your fine-tuned model name.  For example, a `suffix` of \''custom-model-name\'' would produce a model name like `ada:ft-your-org:custom-model-name-2022-02-15-04-21-04`.  *)
     suffix: string option [@default None];
-} [@@deriving yojson { strict = false }, show ];;
-
-let create (training_file : string) : t = {
-    training_file = training_file;
-    validation_file = None;
-    model = None;
-    n_epochs = None;
-    batch_size = None;
-    learning_rate_multiplier = None;
-    prompt_loss_weight = None;
-    compute_classification_metrics = None;
-    classification_n_classes = None;
-    classification_positive_class = None;
-    classification_betas = [];
-    suffix = None;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

@@ -12,14 +12,4 @@ type t = {
     model: string;
     choices: Create_completion_response_choices.t list;
     usage: Create_completion_response_usage.t option [@default None];
-} [@@deriving yojson { strict = false }, show ];;
-
-let create (id : string) (_object : string) (created : int32) (model : string) (choices : Create_completion_response_choices.t list) : t = {
-    id = id;
-    _object = _object;
-    created = created;
-    model = model;
-    choices = choices;
-    usage = None;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

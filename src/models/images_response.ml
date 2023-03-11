@@ -8,10 +8,4 @@
 type t = {
     created: int32;
     data: Images_response_data.t list;
-} [@@deriving yojson { strict = false }, show ];;
-
-let create (created : int32) (data : Images_response_data.t list) : t = {
-    created = created;
-    data = data;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

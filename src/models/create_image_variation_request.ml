@@ -8,9 +8,4 @@
 type t = {
     (* The image to use as the basis for the variation(s). Must be a valid PNG file, less than 4MB, and square. *)
     image: string;
-} [@@deriving yojson { strict = false }, show ];;
-
-let create (image : string) : t = {
-    image = image;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

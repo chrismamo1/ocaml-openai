@@ -7,9 +7,4 @@
 
 type t = {
     text: string;
-} [@@deriving yojson { strict = false }, show ];;
-
-let create (text : string) : t = {
-    text = text;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

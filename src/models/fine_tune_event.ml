@@ -10,12 +10,4 @@ type t = {
     created_at: int32;
     level: string;
     message: string;
-} [@@deriving yojson { strict = false }, show ];;
-
-let create (_object : string) (created_at : int32) (level : string) (message : string) : t = {
-    _object = _object;
-    created_at = created_at;
-    level = level;
-    message = message;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

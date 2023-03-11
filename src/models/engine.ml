@@ -10,12 +10,4 @@ type t = {
     _object: string [@key "object"];
     created: int32 option;
     ready: bool;
-} [@@deriving yojson { strict = false }, show ];;
-
-let create (id : string) (_object : string) (created : int32 option) (ready : bool) : t = {
-    id = id;
-    _object = _object;
-    created = created;
-    ready = ready;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

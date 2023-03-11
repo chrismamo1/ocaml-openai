@@ -12,14 +12,4 @@ type t = {
     completion: string option [@default None];
     answers: string list;
     selected_documents: Create_answer_response_selected_documents.t list;
-} [@@deriving yojson { strict = false }, show ];;
-
-let create () : t = {
-    _object = None;
-    model = None;
-    search_model = None;
-    completion = None;
-    answers = [];
-    selected_documents = [];
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

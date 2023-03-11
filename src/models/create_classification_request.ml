@@ -18,14 +18,4 @@ type t = {
     temperature: float option [@default None];
     (* The maximum number of examples to be ranked by [Search](/docs/api-reference/searches/create) when using `file`. Setting it to a higher value leads to improved accuracy but with increased latency and cost. *)
     max_examples: int32 option [@default None];
-} [@@deriving yojson { strict = false }, show ];;
-
-let create (query : string) : t = {
-    query = query;
-    examples = [];
-    file = None;
-    labels = [];
-    temperature = None;
-    max_examples = None;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

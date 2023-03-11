@@ -9,11 +9,4 @@ type t = {
     _object: string option [@default None] [@key "object"];
     document: int32 option [@default None];
     score: float option [@default None];
-} [@@deriving yojson { strict = false }, show ];;
-
-let create () : t = {
-    _object = None;
-    document = None;
-    score = None;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

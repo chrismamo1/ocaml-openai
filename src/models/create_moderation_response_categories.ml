@@ -13,15 +13,4 @@ type t = {
     sexual_minors: bool;
     violence: bool;
     violence_graphic: bool;
-} [@@deriving yojson { strict = false }, show ];;
-
-let create (hate : bool) (hate_threatening : bool) (self_harm : bool) (sexual : bool) (sexual_minors : bool) (violence : bool) (violence_graphic : bool) : t = {
-    hate = hate;
-    hate_threatening = hate_threatening;
-    self_harm = self_harm;
-    sexual = sexual;
-    sexual_minors = sexual_minors;
-    violence = violence;
-    violence_graphic = violence_graphic;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;

@@ -9,11 +9,4 @@ type t = {
     id: string;
     _object: string [@key "object"];
     deleted: bool;
-} [@@deriving yojson { strict = false }, show ];;
-
-let create (id : string) (_object : string) (deleted : bool) : t = {
-    id = id;
-    _object = _object;
-    deleted = deleted;
-}
-
+} [@@deriving yojson { strict = false }, show, make ];;
