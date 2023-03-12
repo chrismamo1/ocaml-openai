@@ -14,5 +14,15 @@ license: ""
 homepage: ""
 bug-reports: ""
 dev-repo: ""
-depends: [ "ocaml" "ocamlfind" ]
+depends: [
+  "ocaml"
+  "ocamlfind"
+  "ppx_deriving_yojson"
+  "ppx_deriving.show"
+  "ppx_deriving.eq"
+  "ppx_deriving.ord"
+  "ppx_deriving.std"
+  "ez_api.ppx"
+  "lwt_ppx"
+]
 build: ["dune" "build" "-p" name]
