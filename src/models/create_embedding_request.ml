@@ -6,6 +6,7 @@
  *)
 
 type t = {
-    (* Input text to get embeddings for, encoded as a string, array of strings, array of tokens, or array of token arrays. Each input must not exceed 8192 tokens in length.  *)
-    input: MultiTypes.StringOrStringArrayOrIntArrayOrIntArrayArray.t;
-} [@@deriving yojson { strict = false }, show, make ];;
+  (* Input text to get embeddings for, encoded as a string, array of strings, array of tokens, or array of token arrays. Each input must not exceed 8192 tokens in length.  *)
+  input : MultiTypes.StringOrStringArrayOrIntArrayOrIntArrayArray.t;
+}
+[@@deriving yojson { strict = false }, show, make]

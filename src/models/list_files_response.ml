@@ -5,7 +5,5 @@
  *
  *)
 
-type t = {
-    _object: string [@key "object"];
-    data: Open_ai_file.t list;
-} [@@deriving yojson { strict = false }, show, make ];;
+type t = { _object : string; [@key "object"] data : Open_ai_file.t list }
+[@@deriving yojson { strict = false }, show, make]

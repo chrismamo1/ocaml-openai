@@ -6,8 +6,9 @@
  *)
 
 type t = {
-    tokens: string list;
-    token_logprobs: float list;
-    top_logprobs: Yojson.Safe.t list;
-    text_offset: int32 list;
-} [@@deriving yojson { strict = false }, show, make ];;
+  tokens : string list;
+  token_logprobs : float list;
+  top_logprobs : Yojson.Safe.t list;
+  text_offset : int32 list;
+}
+[@@deriving yojson { strict = false }, show, make]

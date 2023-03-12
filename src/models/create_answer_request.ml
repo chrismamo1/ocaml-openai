@@ -6,34 +6,35 @@
  *)
 
 type t = {
-    (* ID of the model to use for completion. You can select one of `ada`, `babbage`, `curie`, or `davinci`. *)
-    model: string;
-    (* Question to get answered. *)
-    question: string;
-    (* List of (question, answer) pairs that will help steer the model towards the tone and answer format you'd like. We recommend adding 2 to 3 examples. *)
-    examples: string list list;
-    (* A text snippet containing the contextual information used to generate the answers for the `examples` you provide. *)
-    examples_context: string;
-    (* List of documents from which the answer for the input `question` should be derived. If this is an empty list, the question will be answered based on the question-answer examples.  You should specify either `documents` or a `file`, but not both.  *)
-    documents: string list;
-    (* The ID of an uploaded file that contains documents to search over. See [upload file](/docs/api-reference/files/upload) for how to upload a file of the desired format and purpose.  You should specify either `documents` or a `file`, but not both.  *)
-    file: string option [@default None];
-    (* ID of the model to use for [Search](/docs/api-reference/searches/create). You can select one of `ada`, `babbage`, `curie`, or `davinci`. *)
-    search_model: string option [@default None];
-    (* The maximum number of documents to be ranked by [Search](/docs/api-reference/searches/create) when using `file`. Setting it to a higher value leads to improved accuracy but with increased latency and cost. *)
-    max_rerank: int32 option [@default None];
-    (* What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. *)
-    temperature: float option [@default None];
-    (* Include the log probabilities on the `logprobs` most likely tokens, as well the chosen tokens. For example, if `logprobs` is 5, the API will return a list of the 5 most likely tokens. The API will always return the `logprob` of the sampled token, so there may be up to `logprobs+1` elements in the response.  The maximum value for `logprobs` is 5. If you need more than this, please contact us through our [Help center](https://help.openai.com) and describe your use case.  When `logprobs` is set, `completion` will be automatically added into `expand` to get the logprobs.  *)
-    logprobs: int32 option [@default None];
-    (* The maximum number of tokens allowed for the generated answer *)
-    max_tokens: int32 option [@default None];
-    (* Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence. *)
-    stop: string array option [@default None];
-    (* How many answers to generate for each question. *)
-    n: int32 option [@default None];
-    (* If set to `true`, the returned JSON will include a \''prompt\'' field containing the final prompt that was used to request a completion. This is mainly useful for debugging purposes. *)
-    return_prompt: bool option [@default None];
-    (* If an object name is in the list, we provide the full information of the object; otherwise, we only provide the object ID. Currently we support `completion` and `file` objects for expansion. *)
-    expand: Yojson.Safe.t list;
-} [@@deriving yojson { strict = false }, show, make ];;
+  (* ID of the model to use for completion. You can select one of `ada`, `babbage`, `curie`, or `davinci`. *)
+  model : string;
+  (* Question to get answered. *)
+  question : string;
+  (* List of (question, answer) pairs that will help steer the model towards the tone and answer format you'd like. We recommend adding 2 to 3 examples. *)
+  examples : string list list;
+  (* A text snippet containing the contextual information used to generate the answers for the `examples` you provide. *)
+  examples_context : string;
+  (* List of documents from which the answer for the input `question` should be derived. If this is an empty list, the question will be answered based on the question-answer examples.  You should specify either `documents` or a `file`, but not both.  *)
+  documents : string list;
+  (* The ID of an uploaded file that contains documents to search over. See [upload file](/docs/api-reference/files/upload) for how to upload a file of the desired format and purpose.  You should specify either `documents` or a `file`, but not both.  *)
+  file : string option; [@default None]
+  (* ID of the model to use for [Search](/docs/api-reference/searches/create). You can select one of `ada`, `babbage`, `curie`, or `davinci`. *)
+  search_model : string option; [@default None]
+  (* The maximum number of documents to be ranked by [Search](/docs/api-reference/searches/create) when using `file`. Setting it to a higher value leads to improved accuracy but with increased latency and cost. *)
+  max_rerank : int32 option; [@default None]
+  (* What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. *)
+  temperature : float option; [@default None]
+  (* Include the log probabilities on the `logprobs` most likely tokens, as well the chosen tokens. For example, if `logprobs` is 5, the API will return a list of the 5 most likely tokens. The API will always return the `logprob` of the sampled token, so there may be up to `logprobs+1` elements in the response.  The maximum value for `logprobs` is 5. If you need more than this, please contact us through our [Help center](https://help.openai.com) and describe your use case.  When `logprobs` is set, `completion` will be automatically added into `expand` to get the logprobs.  *)
+  logprobs : int32 option; [@default None]
+  (* The maximum number of tokens allowed for the generated answer *)
+  max_tokens : int32 option; [@default None]
+  (* Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence. *)
+  stop : string array option; [@default None]
+  (* How many answers to generate for each question. *)
+  n : int32 option; [@default None]
+  (* If set to `true`, the returned JSON will include a \''prompt\'' field containing the final prompt that was used to request a completion. This is mainly useful for debugging purposes. *)
+  return_prompt : bool option; [@default None]
+  (* If an object name is in the list, we provide the full information of the object; otherwise, we only provide the object ID. Currently we support `completion` and `file` objects for expansion. *)
+  expand : Yojson.Safe.t list;
+}
+[@@deriving yojson { strict = false }, show, make]

@@ -6,6 +6,7 @@
  *)
 
 type t = {
-    document: int32 option [@default None];
-    text: string option [@default None];
-} [@@deriving yojson { strict = false }, show, make ];;
+  document : int32 option; [@default None]
+  text : string option; [@default None]
+}
+[@@deriving yojson { strict = false }, show, make]

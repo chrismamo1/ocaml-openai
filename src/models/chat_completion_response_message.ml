@@ -6,8 +6,9 @@
  *)
 
 type t = {
-    (* The role of the author of this message. *)
-    role: Enums.role;
-    (* The contents of the message *)
-    content: string;
-} [@@deriving yojson { strict = false }, show, make ];;
+  (* The role of the author of this message. *)
+  role : Enums.role;
+  (* The contents of the message *)
+  content : string;
+}
+[@@deriving yojson { strict = false }, show, make]

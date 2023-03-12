@@ -6,8 +6,9 @@
  *)
 
 type t = {
-    id: string;
-    _object: string [@key "object"];
-    created: int32;
-    owned_by: string;
-} [@@deriving yojson { strict = false }, show, make ];;
+  id : string;
+  _object : string; [@key "object"]
+  created : int32;
+  owned_by : string;
+}
+[@@deriving yojson { strict = false }, show, make]

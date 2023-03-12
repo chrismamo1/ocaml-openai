@@ -5,7 +5,5 @@
  *
  *)
 
-type t = {
-    _object: string [@key "object"];
-    data: Model.t list;
-} [@@deriving yojson { strict = false }, show, make ];;
+type t = { _object : string; [@key "object"] data : Model.t list }
+[@@deriving yojson { strict = false }, show, make]

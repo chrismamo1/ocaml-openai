@@ -6,8 +6,9 @@
  *)
 
 type t = {
-    (* Name of the [JSON Lines](https://jsonlines.readthedocs.io/en/latest/) file to be uploaded.  If the `purpose` is set to \''fine-tune\'', each line is a JSON record with \''prompt\'' and \''completion\'' fields representing your [training examples](/docs/guides/fine-tuning/prepare-training-data).  *)
-    file: string;
-    (* The intended purpose of the uploaded documents.  Use \''fine-tune\'' for [Fine-tuning](/docs/api-reference/fine-tunes). This allows us to validate the format of the uploaded file.  *)
-    purpose: string;
-} [@@deriving yojson { strict = false }, show, make ];;
+  (* Name of the [JSON Lines](https://jsonlines.readthedocs.io/en/latest/) file to be uploaded.  If the `purpose` is set to \''fine-tune\'', each line is a JSON record with \''prompt\'' and \''completion\'' fields representing your [training examples](/docs/guides/fine-tuning/prepare-training-data).  *)
+  file : string;
+  (* The intended purpose of the uploaded documents.  Use \''fine-tune\'' for [Fine-tuning](/docs/api-reference/fine-tunes). This allows us to validate the format of the uploaded file.  *)
+  purpose : string;
+}
+[@@deriving yojson { strict = false }, show, make]

@@ -6,11 +6,12 @@
  *)
 
 type t = {
-    hate: float;
-    hate_threatening: float;
-    self_harm: float;
-    sexual: float;
-    sexual_minors: float;
-    violence: float;
-    violence_graphic: float;
-} [@@deriving yojson { strict = false }, show, make ];;
+  hate : float;
+  hate_threatening : float;
+  self_harm : float;
+  sexual : float;
+  sexual_minors : float;
+  violence : float;
+  violence_graphic : float;
+}
+[@@deriving yojson { strict = false }, show, make]

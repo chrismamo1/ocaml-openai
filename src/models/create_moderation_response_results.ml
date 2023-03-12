@@ -6,7 +6,8 @@
  *)
 
 type t = {
-    flagged: bool;
-    categories: Create_moderation_response_categories.t;
-    category_scores: Create_moderation_response_category_scores.t;
-} [@@deriving yojson { strict = false }, show, make ];;
+  flagged : bool;
+  categories : Create_moderation_response_categories.t;
+  category_scores : Create_moderation_response_category_scores.t;
+}
+[@@deriving yojson { strict = false }, show, make]

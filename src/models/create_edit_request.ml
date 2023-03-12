@@ -6,16 +6,17 @@
  *)
 
 type t = {
-    (* ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001` model with this endpoint. *)
-    model: string;
-    (* The input text to use as a starting point for the edit. *)
-    input: string option [@default None];
-    (* The instruction that tells the model how to edit the prompt. *)
-    instruction: string;
-    (* How many edits to generate for the input and instruction. *)
-    n: int32 option [@default None];
-    (* completions_temperature_description *)
-    temperature: float option [@default None];
-    (* completions_top_p_description *)
-    top_p: float option [@default None];
-} [@@deriving yojson { strict = false }, show, make ];;
+  (* ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001` model with this endpoint. *)
+  model : string;
+  (* The input text to use as a starting point for the edit. *)
+  input : string option; [@default None]
+  (* The instruction that tells the model how to edit the prompt. *)
+  instruction : string;
+  (* How many edits to generate for the input and instruction. *)
+  n : int32 option; [@default None]
+  (* completions_temperature_description *)
+  temperature : float option; [@default None]
+  (* completions_top_p_description *)
+  top_p : float option; [@default None]
+}
+[@@deriving yojson { strict = false }, show, make]

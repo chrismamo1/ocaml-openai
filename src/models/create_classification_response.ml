@@ -6,10 +6,11 @@
  *)
 
 type t = {
-    _object: string option [@default None] [@key "object"];
-    model: string option [@default None];
-    search_model: string option [@default None];
-    completion: string option [@default None];
-    label: string option [@default None];
-    selected_examples: Create_classification_response_selected_examples.t list;
-} [@@deriving yojson { strict = false }, show, make ];;
+  _object : string option; [@default None] [@key "object"]
+  model : string option; [@default None]
+  search_model : string option; [@default None]
+  completion : string option; [@default None]
+  label : string option; [@default None]
+  selected_examples : Create_classification_response_selected_examples.t list;
+}
+[@@deriving yojson { strict = false }, show, make]

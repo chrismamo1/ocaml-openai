@@ -5,6 +5,4 @@
  *
  *)
 
-type t = {
-    text: string;
-} [@@deriving yojson { strict = false }, show, make ];;
+type t = { text : string } [@@deriving yojson { strict = false }, show, make]

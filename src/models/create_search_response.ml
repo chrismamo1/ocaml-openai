@@ -6,7 +6,8 @@
  *)
 
 type t = {
-    _object: string option [@default None] [@key "object"];
-    model: string option [@default None];
-    data: Create_search_response_data.t list;
-} [@@deriving yojson { strict = false }, show, make ];;
+  _object : string option; [@default None] [@key "object"]
+  model : string option; [@default None]
+  data : Create_search_response_data.t list;
+}
+[@@deriving yojson { strict = false }, show, make]

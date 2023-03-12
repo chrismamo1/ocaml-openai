@@ -6,10 +6,11 @@
  *)
 
 type t = {
-    id: string;
-    _object: string [@key "object"];
-    created: int32;
-    model: string;
-    choices: Create_chat_completion_response_choices.t list;
-    usage: Create_completion_response_usage.t option [@default None];
-} [@@deriving yojson { strict = false }, show, make ];;
+  id : string;
+  _object : string; [@key "object"]
+  created : int32;
+  model : string;
+  choices : Create_chat_completion_response_choices.t list;
+  usage : Create_completion_response_usage.t option; [@default None]
+}
+[@@deriving yojson { strict = false }, show, make]

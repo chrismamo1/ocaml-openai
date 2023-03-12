@@ -6,10 +6,11 @@
  *)
 
 type t = {
-    (* The role of the author of this message. *)
-    role: Enums.role;
-    (* The contents of the message *)
-    content: string;
-    (* The name of the user in a multi-user chat *)
-    name: string option [@default None];
-} [@@deriving yojson { strict = false }, show, make ];;
+  (* The role of the author of this message. *)
+  role : Enums.role;
+  (* The contents of the message *)
+  content : string;
+  (* The name of the user in a multi-user chat *)
+  name : string option; [@default None]
+}
+[@@deriving yojson { strict = false }, show, make]

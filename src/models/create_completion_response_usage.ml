@@ -6,7 +6,8 @@
  *)
 
 type t = {
-    prompt_tokens: int32;
-    completion_tokens: int32;
-    total_tokens: int32;
-} [@@deriving yojson { strict = false }, show, make ];;
+  prompt_tokens : int32;
+  completion_tokens : int32;
+  total_tokens : int32;
+}
+[@@deriving yojson { strict = false }, show, make]

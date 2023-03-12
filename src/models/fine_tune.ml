@@ -6,17 +6,18 @@
  *)
 
 type t = {
-    id: string;
-    _object: string [@key "object"];
-    created_at: int32;
-    updated_at: int32;
-    model: string;
-    fine_tuned_model: string option;
-    organization_id: string;
-    status: string;
-    hyperparams: Yojson.Safe.t;
-    training_files: Open_ai_file.t list;
-    validation_files: Open_ai_file.t list;
-    result_files: Open_ai_file.t list;
-    events: Fine_tune_event.t list;
-} [@@deriving yojson { strict = false }, show, make ];;
+  id : string;
+  _object : string; [@key "object"]
+  created_at : int32;
+  updated_at : int32;
+  model : string;
+  fine_tuned_model : string option;
+  organization_id : string;
+  status : string;
+  hyperparams : Yojson.Safe.t;
+  training_files : Open_ai_file.t list;
+  validation_files : Open_ai_file.t list;
+  result_files : Open_ai_file.t list;
+  events : Fine_tune_event.t list;
+}
+[@@deriving yojson { strict = false }, show, make]

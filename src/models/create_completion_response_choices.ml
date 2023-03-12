@@ -6,8 +6,9 @@
  *)
 
 type t = {
-    text: string option [@default None];
-    index: int32 option [@default None];
-    logprobs: Create_completion_response_logprobs.t option [@default None];
-    finish_reason: string option [@default None];
-} [@@deriving yojson { strict = false }, show, make ];;
+  text : string option; [@default None]
+  index : int32 option; [@default None]
+  logprobs : Create_completion_response_logprobs.t option; [@default None]
+  finish_reason : string option; [@default None]
+}
+[@@deriving yojson { strict = false }, show, make]

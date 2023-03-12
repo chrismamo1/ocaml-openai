@@ -6,12 +6,13 @@
  *)
 
 type t = {
-    (* A text description of the desired image(s). The maximum length is 1000 characters. *)
-    prompt: string;
-    (* The number of images to generate. Must be between 1 and 10. *)
-    n: int32 option [@default None];
-    (* The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. *)
-    size: Enums.size option [@default Some(`_1024x1024)];
-    (* The format in which the generated images are returned. Must be one of `url` or `b64_json`. *)
-    response_format: Enums.response_format option [@default Some(`Url)];
-} [@@deriving yojson { strict = false }, show, make ];;
+  (* A text description of the desired image(s). The maximum length is 1000 characters. *)
+  prompt : string;
+  (* The number of images to generate. Must be between 1 and 10. *)
+  n : int32 option; [@default None]
+  (* The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. *)
+  size : Enums.size option; [@default Some `_1024x1024]
+  (* The format in which the generated images are returned. Must be one of `url` or `b64_json`. *)
+  response_format : Enums.response_format option; [@default Some `Url]
+}
+[@@deriving yojson { strict = false }, show, make]

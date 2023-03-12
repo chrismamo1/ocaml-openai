@@ -6,7 +6,8 @@
  *)
 
 type t = {
-    _object: string option [@default None] [@key "object"];
-    document: int32 option [@default None];
-    score: float option [@default None];
-} [@@deriving yojson { strict = false }, show, make ];;
+  _object : string option; [@default None] [@key "object"]
+  document : int32 option; [@default None]
+  score : float option; [@default None]
+}
+[@@deriving yojson { strict = false }, show, make]

@@ -5,8 +5,5 @@
  *
  *)
 
-type t = {
-    id: string;
-    _object: string [@key "object"];
-    deleted: bool;
-} [@@deriving yojson { strict = false }, show, make ];;
+type t = { id : string; _object : string; [@key "object"] deleted : bool }
+[@@deriving yojson { strict = false }, show, make]

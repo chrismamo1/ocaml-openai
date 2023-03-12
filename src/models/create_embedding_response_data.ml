@@ -6,7 +6,8 @@
  *)
 
 type t = {
-    index: int32;
-    _object: string [@key "object"];
-    embedding: float list;
-} [@@deriving yojson { strict = false }, show, make ];;
+  index : int32;
+  _object : string; [@key "object"]
+  embedding : float list;
+}
+[@@deriving yojson { strict = false }, show, make]

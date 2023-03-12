@@ -6,6 +6,7 @@
  *)
 
 type t = {
-    url: string option [@default None];
-    b64_json: string option [@default None];
-} [@@deriving yojson { strict = false }, show, make ];;
+  url : string option; [@default None]
+  b64_json : string option; [@default None]
+}
+[@@deriving yojson { strict = false }, show, make]
