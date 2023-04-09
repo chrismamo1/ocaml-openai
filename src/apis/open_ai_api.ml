@@ -12,8 +12,7 @@ let cancel_fine_tune ~fine_tune_id =
   let uri =
     Request.replace_path_param uri "fine_tune_id" (fun x -> x) fine_tune_id
   in
-  Cohttp_lwt_unix.Client.call `POST uri ~headers
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `POST uri ~headers >>= fun (resp, body) ->
   Request.read_json_body_as (JsonSupport.unwrap Fine_tune.of_yojson) resp body
 
 let create_answer ~create_answer_request_t =
@@ -24,8 +23,7 @@ let create_answer ~create_answer_request_t =
     Request.write_as_json_body Create_answer_request.to_yojson
       create_answer_request_t
   in
-  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body >>= fun (resp, body) ->
   Request.read_json_body_as
     (JsonSupport.unwrap Create_answer_response.of_yojson)
     resp body
@@ -38,8 +36,7 @@ let create_chat_completion ~create_chat_completion_request_t =
     Request.write_as_json_body Create_chat_completion_request.to_yojson
       create_chat_completion_request_t
   in
-  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body >>= fun (resp, body) ->
   Request.read_json_body_as
     (JsonSupport.unwrap Create_chat_completion_response.of_yojson)
     resp body
@@ -52,8 +49,7 @@ let create_classification ~create_classification_request_t =
     Request.write_as_json_body Create_classification_request.to_yojson
       create_classification_request_t
   in
-  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body >>= fun (resp, body) ->
   Request.read_json_body_as
     (JsonSupport.unwrap Create_classification_response.of_yojson)
     resp body
@@ -66,8 +62,7 @@ let create_completion ~create_completion_request_t =
     Request.write_as_json_body Create_completion_request.to_yojson
       create_completion_request_t
   in
-  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body >>= fun (resp, body) ->
   Request.read_json_body_as
     (JsonSupport.unwrap Create_completion_response.of_yojson)
     resp body
@@ -80,8 +75,7 @@ let create_edit ~create_edit_request_t =
     Request.write_as_json_body Create_edit_request.to_yojson
       create_edit_request_t
   in
-  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body >>= fun (resp, body) ->
   Request.read_json_body_as
     (JsonSupport.unwrap Create_edit_response.of_yojson)
     resp body
@@ -94,8 +88,7 @@ let create_embedding ~create_embedding_request_t =
     Request.write_as_json_body Create_embedding_request.to_yojson
       create_embedding_request_t
   in
-  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body >>= fun (resp, body) ->
   Request.read_json_body_as
     (JsonSupport.unwrap Create_embedding_response.of_yojson)
     resp body
@@ -112,8 +105,7 @@ let create_file ~file ~purpose =
     Request.add_form_encoded_body_param body "purpose" (fun x -> x) purpose
   in
   let body = Request.finalize_form_encoded_body body in
-  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body >>= fun (resp, body) ->
   Request.read_json_body_as
     (JsonSupport.unwrap Open_ai_file.of_yojson)
     resp body
@@ -126,8 +118,7 @@ let create_fine_tune ~create_fine_tune_request_t =
     Request.write_as_json_body Create_fine_tune_request.to_yojson
       create_fine_tune_request_t
   in
-  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body >>= fun (resp, body) ->
   Request.read_json_body_as (JsonSupport.unwrap Fine_tune.of_yojson) resp body
 
 let create_image ~create_image_request_t =
@@ -138,8 +129,7 @@ let create_image ~create_image_request_t =
     Request.write_as_json_body Create_image_request.to_yojson
       create_image_request_t
   in
-  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body >>= fun (resp, body) ->
   Request.read_json_body_as
     (JsonSupport.unwrap Images_response.of_yojson)
     resp body
@@ -159,8 +149,7 @@ let create_image_edit ~image ~prompt ?mask () =
     Request.add_form_encoded_body_param body "prompt" (fun x -> x) prompt
   in
   let body = Request.finalize_form_encoded_body body in
-  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body >>= fun (resp, body) ->
   Request.read_json_body_as
     (JsonSupport.unwrap Images_response.of_yojson)
     resp body
@@ -169,13 +158,14 @@ let create_image_variation ~image =
   let open Lwt in
   let uri = Request.build_uri "/images/variations" in
   let headers = Request.default_headers in
-  let body = Request.init_form_encoded_body () in
-  let body =
-    Request.add_form_encoded_body_param body "image" (fun x -> x) image
+  let multipart = Request.Multipart_form_data.init_multipart_body () in
+  let multipart =
+    Request.Multipart_form_data.add_field ~name:"image" ~value:image
+      ~content_type:"image/png" ~file_name:"anyImage.png" multipart
   in
-  let body = Request.finalize_form_encoded_body body in
-  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body
-  >>= fun (resp, body) ->
+  let headers, body = Request.Multipart_form_data.make_req ~headers multipart in
+  Cohttp.Header.to_string headers |> print_endline;
+  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body >>= fun (resp, body) ->
   Request.read_json_body_as
     (JsonSupport.unwrap Images_response.of_yojson)
     resp body
@@ -188,8 +178,7 @@ let create_moderation ~create_moderation_request_t =
     Request.write_as_json_body Create_moderation_request.to_yojson
       create_moderation_request_t
   in
-  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body >>= fun (resp, body) ->
   Request.read_json_body_as
     (JsonSupport.unwrap Create_moderation_response.of_yojson)
     resp body
@@ -203,8 +192,7 @@ let create_search ~engine_id ~create_search_request_t =
     Request.write_as_json_body Create_search_request.to_yojson
       create_search_request_t
   in
-  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body >>= fun (resp, body) ->
   Request.read_json_body_as
     (JsonSupport.unwrap Create_search_response.of_yojson)
     resp body
@@ -239,8 +227,7 @@ let create_transcription ~file ~model ?prompt ?(response_format = "json")
       language
   in
   let body = Request.finalize_form_encoded_body body in
-  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body >>= fun (resp, body) ->
   Request.read_json_body_as
     (JsonSupport.unwrap Create_transcription_response.of_yojson)
     resp body
@@ -270,8 +257,7 @@ let create_translation ~file ~model ?prompt ?(response_format = "json")
       temperature
   in
   let body = Request.finalize_form_encoded_body body in
-  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `POST uri ~headers ~body >>= fun (resp, body) ->
   Request.read_json_body_as
     (JsonSupport.unwrap Create_translation_response.of_yojson)
     resp body
@@ -281,8 +267,7 @@ let delete_file ~file_id =
   let uri = Request.build_uri "/files/{file_id}" in
   let headers = Request.default_headers in
   let uri = Request.replace_path_param uri "file_id" (fun x -> x) file_id in
-  Cohttp_lwt_unix.Client.call `DELETE uri ~headers
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `DELETE uri ~headers >>= fun (resp, body) ->
   Request.read_json_body_as
     (JsonSupport.unwrap Delete_file_response.of_yojson)
     resp body
@@ -292,8 +277,7 @@ let delete_model ~model =
   let uri = Request.build_uri "/models/{model}" in
   let headers = Request.default_headers in
   let uri = Request.replace_path_param uri "model" (fun x -> x) model in
-  Cohttp_lwt_unix.Client.call `DELETE uri ~headers
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `DELETE uri ~headers >>= fun (resp, body) ->
   Request.read_json_body_as
     (JsonSupport.unwrap Delete_model_response.of_yojson)
     resp body
@@ -303,16 +287,14 @@ let download_file ~file_id =
   let uri = Request.build_uri "/files/{file_id}/content" in
   let headers = Request.default_headers in
   let uri = Request.replace_path_param uri "file_id" (fun x -> x) file_id in
-  Cohttp_lwt_unix.Client.call `GET uri ~headers
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `GET uri ~headers >>= fun (resp, body) ->
   Request.read_json_body_as JsonSupport.to_string resp body
 
 let list_engines () =
   let open Lwt in
   let uri = Request.build_uri "/engines" in
   let headers = Request.default_headers in
-  Cohttp_lwt_unix.Client.call `GET uri ~headers
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `GET uri ~headers >>= fun (resp, body) ->
   Request.read_json_body_as
     (JsonSupport.unwrap List_engines_response.of_yojson)
     resp body
@@ -321,8 +303,7 @@ let list_files () =
   let open Lwt in
   let uri = Request.build_uri "/files" in
   let headers = Request.default_headers in
-  Cohttp_lwt_unix.Client.call `GET uri ~headers
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `GET uri ~headers >>= fun (resp, body) ->
   Request.read_json_body_as
     (JsonSupport.unwrap List_files_response.of_yojson)
     resp body
@@ -335,8 +316,7 @@ let list_fine_tune_events ~fine_tune_id ?(stream = false) () =
     Request.replace_path_param uri "fine_tune_id" (fun x -> x) fine_tune_id
   in
   let uri = Request.add_query_param uri "stream" string_of_bool stream in
-  Cohttp_lwt_unix.Client.call `GET uri ~headers
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `GET uri ~headers >>= fun (resp, body) ->
   Request.read_json_body_as
     (JsonSupport.unwrap List_fine_tune_events_response.of_yojson)
     resp body
@@ -345,8 +325,7 @@ let list_fine_tunes () =
   let open Lwt in
   let uri = Request.build_uri "/fine-tunes" in
   let headers = Request.default_headers in
-  Cohttp_lwt_unix.Client.call `GET uri ~headers
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `GET uri ~headers >>= fun (resp, body) ->
   Request.read_json_body_as
     (JsonSupport.unwrap List_fine_tunes_response.of_yojson)
     resp body
@@ -355,8 +334,7 @@ let list_models () =
   let open Lwt in
   let uri = Request.build_uri "/models" in
   let headers = Request.default_headers in
-  Cohttp_lwt_unix.Client.call `GET uri ~headers
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `GET uri ~headers >>= fun (resp, body) ->
   Request.read_json_body_as
     (JsonSupport.unwrap List_models_response.of_yojson)
     resp body
@@ -366,8 +344,7 @@ let retrieve_engine ~engine_id =
   let uri = Request.build_uri "/engines/{engine_id}" in
   let headers = Request.default_headers in
   let uri = Request.replace_path_param uri "engine_id" (fun x -> x) engine_id in
-  Cohttp_lwt_unix.Client.call `GET uri ~headers
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `GET uri ~headers >>= fun (resp, body) ->
   Request.read_json_body_as (JsonSupport.unwrap Engine.of_yojson) resp body
 
 let retrieve_file ~file_id =
@@ -375,8 +352,7 @@ let retrieve_file ~file_id =
   let uri = Request.build_uri "/files/{file_id}" in
   let headers = Request.default_headers in
   let uri = Request.replace_path_param uri "file_id" (fun x -> x) file_id in
-  Cohttp_lwt_unix.Client.call `GET uri ~headers
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `GET uri ~headers >>= fun (resp, body) ->
   Request.read_json_body_as
     (JsonSupport.unwrap Open_ai_file.of_yojson)
     resp body
@@ -388,8 +364,7 @@ let retrieve_fine_tune ~fine_tune_id =
   let uri =
     Request.replace_path_param uri "fine_tune_id" (fun x -> x) fine_tune_id
   in
-  Cohttp_lwt_unix.Client.call `GET uri ~headers
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `GET uri ~headers >>= fun (resp, body) ->
   Request.read_json_body_as (JsonSupport.unwrap Fine_tune.of_yojson) resp body
 
 let retrieve_model ~model =
@@ -397,6 +372,5 @@ let retrieve_model ~model =
   let uri = Request.build_uri "/models/{model}" in
   let headers = Request.default_headers in
   let uri = Request.replace_path_param uri "model" (fun x -> x) model in
-  Cohttp_lwt_unix.Client.call `GET uri ~headers
-  >>= fun (resp, body) ->
+  Cohttp_lwt_unix.Client.call `GET uri ~headers >>= fun (resp, body) ->
   Request.read_json_body_as (JsonSupport.unwrap Model.of_yojson) resp body

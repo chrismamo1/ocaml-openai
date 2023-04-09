@@ -105,3 +105,52 @@ let maybe_add_form_encoded_body_param params param_name to_string param_value =
     params param_value
 
 let finalize_form_encoded_body body = Cohttp_lwt.Body.of_string body
+
+module Multipart_form_data = struct
+  let () = Random.self_init ()
+
+  type field = {
+    name : string;
+    value : string;
+    content_type : string option;
+    file_name : string option;
+  }
+
+  type t = { boundary : string; fields : field list }
+
+  let init_multipart_body () =
+    let boundary =
+      let chars = "abcdefghijklmnopqrstuvwxyz0123456789" in
+      let len = String.length chars in
+      let random_char () = chars.[Random.int len] in
+      String.init 32 (fun _ -> random_char ())
+    in
+    { boundary; fields = [] }
+
+  let add_field ~name ~value ?content_type ?file_name t =
+    { t with fields = { name; value; content_type; file_name } :: t.fields }
+
+  let make_req ~headers t =
+    let headers =
+      Cohttp.Header.add headers "Content-Type"
+        ("multipart/form-data; boundary=" ^ t.boundary)
+    in
+    let buf = Buffer.create 1024 in
+    let add_field { name; value; content_type; file_name } =
+      Buffer.add_string buf ("--" ^ t.boundary ^ "\r\n");
+      Buffer.add_string buf
+        ("Content-Disposition: form-data; name=\"" ^ name ^ "\"");
+      (match file_name with
+      | Some fn -> Buffer.add_string buf ("; filename=\"" ^ fn ^ "\"\r\n")
+      | None -> Buffer.add_string buf "\r\n");
+      (match content_type with
+      | Some t -> Buffer.add_string buf ("Content-Type: " ^ t ^ "\r\n")
+      | None -> ());
+      Buffer.add_string buf "\r\n";
+      Buffer.add_string buf value;
+      Buffer.add_string buf "\r\n"
+    in
+    List.iter add_field t.fields;
+    Buffer.add_string buf ("--" ^ t.boundary ^ "--\r\n");
+    (headers, Cohttp_lwt.Body.of_string (Buffer.contents buf))
+end
